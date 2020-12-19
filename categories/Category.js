@@ -4,7 +4,7 @@ const { STRING } = require("sequelize")
 const Sequelize = require("sequelize")
 const connection = require("../database/database")
 
-const Category =  connection.define('categorias',{
+const Category =  connection.define('categories',{
     title:{
         type: Sequelize.STRING,
         allowNull: false
@@ -14,5 +14,9 @@ const Category =  connection.define('categorias',{
         allowNull: false
     }
 })
+
+
+//Arquivo foi removido para não tentar criar toda vez que o projeto rodar
+// Category.sync({force:true})
 
 module.exports= Category

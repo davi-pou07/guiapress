@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-
+//Importando banco de dados
+const Article = require('./articles/Article')
+const Category = require('./categories/Category')
 //rotas router
 const categoriesController = require('./categories/CategoriesController')
 const articlescontroller= require('./articles/ArticlesController')
