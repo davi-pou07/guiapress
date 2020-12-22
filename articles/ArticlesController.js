@@ -1,14 +1,35 @@
 //Criação de rotas de outro arquivo JS para mandar para a index
 const express = require('express')
 const router = express.Router()
+const Category = require('../categories/Category')
+const Article = require('./Article')
+const slugify = require("slugify")
 
-
-router.get("/articles",(req,res)=>{
+router.get("/admin/articles",(req,res)=>{
     res.send("ROTA articles")
 })
 
 router.get("/admin/articles/new",(req,res)=>{
-    res.send("ROTA PARA CRIAR UMA NOVA articles")
+    Category.findAll().then(categories =>{
+        res.render("admin/articles/new",{categories:categories})
+    })
+   
+})
+
+router.post("/articles/save",(req,res)=>{
+    var title = req.body.title
+    var body = req.body.body
+    var category = req.body.category
+
+    Article.create({
+        title:title,
+        slug: slugify(title),
+        body:body,
+        categoryId:category
+    }).then(()=>{
+        res.redirect("/admin/articles")
+    })
 })
 
 module.exports = router
+
