@@ -1,0 +1,62 @@
+<%- include('../../partials/header.ejs')%>
+
+    <%- include('../../partials/navbar.ejs')%>
+
+        <div class="container">
+            <hr>
+            <h2>Artigos</h2>
+            <a href="/admin/articles/new" class='btn btn-success'>Criar novo Artigo</a>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titulo</th>
+                        <th>Slug</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% article.forEach(article=>{%>
+                            <td>
+                                <%= article.id%>
+                            </td>
+                            <td>
+                                <%= article.title%>
+                            </td>
+                            <td>
+                                <%= article.slug%>
+                            </td>
+                            <td>
+                                <%= article.category.title %>
+                            </td>
+                            <th>
+                                <form method="POST" action="/articles/delete" style="display: inline;"
+                                    onsubmit="confirmarDelecao(event,this)">
+                                    <input type="hidden" name="id" value="<%=article.id%>">
+                                    <button class="btn btn-danger">Deletar</button>
+                                </form>
+                            </th>
+                    </tr>
+                    <%})%>
+
+                </tbody>
+            </table>
+        </div>
+
+        <%- include('../../partials/footer.ejs')%>
+            <script>
+                function confirmarDelecao(event, form) {
+                    //Não deixa enviar o formulario
+                    event.preventDefault();
+                    var decision = confirm("Você quer deletar esse artigo?")
+                    if (decision) {
+                        //Manda o formulario -- o This dentro de um evento em tml você esta referenciando o formulrio em sim
+                        form.submit()
+                    } else {
+
+                    }
+                }
+            </script>
