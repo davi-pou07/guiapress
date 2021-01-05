@@ -1,0 +1,52 @@
+<%- include('../../partials/header.ejs')%>
+
+    <%- include('../../partials/navbar.ejs')%>
+        <div class="container">
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Atualizar artigo</h2>
+                </div> 
+                <div class="card-body">
+                    <form method="POST" action="/articles/save">
+                        <!--Download do TINY https://www.tiny.cloud/get-tiny/self-hosted/ -->
+                        <input class="form-control" type="text" name="title"
+                            placeholder="Defina o título de seu artigo" value="<%=article.title%>">
+                        <br>
+                        <textarea class="form-control" name="body" placeholder="Escreva seu artigo aqui"
+                            id="article"><%-article.body%></textarea>
+                        <label>Categorias</label>
+                            <select name="category" class="form-control">
+                                <br>
+                                <% categories.forEach((category)=>{ %>
+                                    <option value="<%=category.id%>">
+                                        <%= category.title %>
+                                    </option>
+                                    <%})%>
+                            </select>
+                        
+                        <br>
+                        <button class="btn btn-success">Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+        <%- include('../../partials/footer.ejs')%>
+        <script>
+            console.log($("#content").html())
+        </script>
+            <script src="/tinymce/tinymce.min.js"></script>
+            <script>
+
+                tinymce.init({
+                    language: 'pt_BR',
+                    selector: "#article",
+                    activeEditor:true,
+                    plugins: [
+                        'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime  media save table paste emoticons'
+                    ]
+                })
+                
+            </script>
