@@ -1,12 +1,16 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const session = require("express-session")
 //Importando banco de dados
 const Article = require('./articles/Article')
 const Category = require('./categories/Category')
+const User = require('./user/User')
 //rotas router
 const categoriesController = require('./categories/CategoriesController')
 const articlescontroller= require('./articles/ArticlesController')
+const usercontroller= require('./user/UserController')
+
 
 //database connection
 const connection = require('./database/database')
@@ -24,6 +28,12 @@ connection
 //view engine
 app.set('view engine','ejs')
 
+//sessions
+app.use(session({
+    secret:"adfsddfbdfbdfbdbfxfgdfbgffgndfbdfbdf",
+    //tempo em milisegundos
+    cookie:{maxAge:3000}
+}))
 //static
 app.use(express.static('public'))
 
@@ -37,11 +47,13 @@ app.use(bodyParser.json())
 // A rota categoria so será acessada a partir do prefixo... ("/prefixo/xxxx")
 app.use('/',categoriesController)
 app.use('/',articlescontroller)
+app.use("/",usercontroller)
 
 app.get('/',(req,res)=>{
     Article.findAll({
         raw:true,
-        order:[['id','DESC']]
+        order:[['id','DESC']],
+        limit:4
     }).then(articles =>{
         Category.findAll().then(categories=>{
             res.render('index',{articles:articles,categories:categories})

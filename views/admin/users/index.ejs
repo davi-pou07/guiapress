@@ -4,46 +4,36 @@
 
         <div class="container">
             <hr>
-            <h2>Artigos</h2>
-            <a href="/admin/articles/new" class='btn btn-success'>Criar novo Artigo</a>
+            <h2>Usuarios</h2>
+            <a href="/admin/users/create" class='btn btn-success'>Cadastrar novo usuario</a>
             <hr>
             <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Titulo</th>
-                        <th>Slug</th>
-                        <th>Categoria</th>
+                        <th>Email</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <% article.forEach(article=>{%>
+                        <% users.forEach(user=>{%>
                             <td>
-                                <%= article.id%>
+                                <%= user.id%>
                             </td>
                             <td>
-                                <%= article.title%>
+                                <%= user.email%>
                             </td>
                             <td>
-                                <%= article.slug%>
-                            </td>
-                            <td>
-                                <%= article.category.title %>
-                            </td>
-                            <td>
-                                <form method="POST" action="/articles/delete" style="display: inline;"
+                                <form method="POST" action="/user/delete" style="display: inline;"
                                     onsubmit="confirmarDelecao(event,this)">
-                                    <input type="hidden" name="id" value="<%=article.id%>">
+                                    <input type="hidden" name="id" value="<%=user.id%>">
                                     <button class="btn btn-danger">Deletar</button>
                                 </form>
-                                <a class="btn btn-primary" href="/admin/articles/edit/<%=article.id%>">Editar</a>
+                                <a class="btn btn-primary" href="/admin/users/edit/<%=user.id%>">Editar</a>
                             </td>
-                        
                     </tr>
                     <%})%>
-
                 </tbody>
             </table>
         </div>

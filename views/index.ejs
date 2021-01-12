@@ -1,27 +1,36 @@
 <%- include('partials/header.ejs')%>
 
-<body>
-    <%- include('partials/navbar2.ejs')%>
-    <div class="container">
-        <hr>
-        <div class="jumbotron">
-            <h1 class="display-4">Bem Vindo!</h1>
-            <p class="lead">Este é um simples blog</p>
-            <hr class="my-4">
-            <p>Descrição detalhada aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Ler mais</a>
-          </div>
-        <hr>
-        <%articles.forEach(articles =>{%>
-            <div class="card">
-                <div class="card-header">
-                    <h2><%= articles.title%></h2>
+    <body>
+        <%- include('partials/navbar2.ejs')%>
+            <div class="container">
+                <hr>
+                <div class="jumbotron">
+                    <h1 class="display-4">Bem Vindo!</h1>
+                    <p class="lead">Este é um simples blog</p>
+                    <hr class="my-4">
+                    <p>Descrição detalhada aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Ler mais</a>
                 </div>
-                <div class="card-body"></div>
-                <a href="/<%= articles.slug%>" class="btn btn-success">Ler Artigo</a>
+                <hr>
+                <%articles.forEach(articles=>{%>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>
+                                <%= articles.title%>
+                            </h2>
+                        </div>
+                        <div class="card-body"></div>
+                        <a href="/<%= articles.slug%>" class="btn btn-success">Ler Artigo</a>
+                    </div>
+                    <br>
+                    <%})%>
+                        <div class="row">
+                            <div class="col col-12">
+                                <a style="float: right;" href="/articles/page/2">Proxima pagina >>></a>
+                            </div>
+                        </div>
+                        <hr>
             </div>
-            <br>
-        <%})%>
-    </div>
-</body>
-<%- include('partials/footer.ejs')%>
+            <hr>
+    </body>
+    <%- include('partials/footer.ejs')%>
