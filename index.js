@@ -29,10 +29,11 @@ connection
 app.set('view engine','ejs')
 
 //sessions
+// Redis salvamente de memoria cash
 app.use(session({
     secret:"adfsddfbdfbdfbdbfxfgdfbgffgndfbdfbdf",
     //tempo em milisegundos
-    cookie:{maxAge:3000}
+    cookie:{maxAge:3000000}
 }))
 //static
 app.use(express.static('public'))
