@@ -98,7 +98,8 @@ router.post("/autenticate",(req,res)=>{
                     id:user.id,
                     email:user.email
                 }
-                res.json(req.session.user)
+                // res.json(req.session.user)
+                res.redirect("/admin/articles")
             } else {
                 res.redirect("/login")
             }
@@ -106,6 +107,11 @@ router.post("/autenticate",(req,res)=>{
             res.redirect("/login")
         }
     })
+})
+
+router.get("/logout",(req,res)=>{
+    req.session.user = undefined
+    res.redirect("/")
 })
 
 // User.sync({force:true})
